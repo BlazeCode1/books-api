@@ -35,7 +35,7 @@ func (bc *BookController) AddBook(c *fiber.Ctx) error {
 func (bc *BookController) GetBooks(c *fiber.Ctx) error {
 	books, err := bc.bookService.GetBooks()
 	if err != nil {
-		return fiber.NewError(fiber.StatusInternalServerError, "Failed to fetch books")
+		return fiber.NewError(fiber.StatusInternalServerError, err.Error())
 	}
 
 	return c.JSON(books)
