@@ -3,14 +3,15 @@ package services
 import (
 	"context"
 	"log"
-	grpc "google.golang.org/grpc"
+
 	pb "github.com/BlazeCode1/books-api/server/proto"
 	"github.com/segmentio/kafka-go"
+	grpc "google.golang.org/grpc"
 )
 
 type BookService interface {
 	AddBook(bookName string) (*pb.BookResponse, error)
-	GetBooks() ([]*pb.Book, error)
+	GetBooks() ([]*pb.BookListResponse, error)
 	DeleteBook(id string) (*pb.BookResponse, error)
 	UpdateBook(id, bookName string) error
 }
@@ -37,12 +38,12 @@ func (s *bookService) AddBook(bookName string) (*pb.BookResponse, error) {
 	return response, nil
 }
 
-func (s *bookService) GetBooks() ([]*pb.Book, error) {
+func (s *bookService) GetBooks() ([]*pb.BookListResponse, error) {
 	response, err := s.client.GetBooks(context.Background(), &pb.EmptyRequest{})
 	if err != nil {
 		return nil, err
 	}
-	return response.Books, nil
+	return []*pb.BookListResponse{response}, nil
 }
 
 func (s *bookService) DeleteBook(id string) (*pb.BookResponse, error) {

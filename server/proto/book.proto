@@ -1,6 +1,9 @@
 syntax = "proto3";
 
-package proto;
+package book;
+
+option go_package = "github.com/BlazeCode1/books-api/server/proto";
+
 
 service BookService {
 //  grpc method to handle a book name

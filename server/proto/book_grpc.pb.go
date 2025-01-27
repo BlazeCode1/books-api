@@ -4,7 +4,7 @@
 // - protoc             v5.29.3
 // source: server/proto/book.proto
 
-package book
+package proto
 
 import (
 	context "context"

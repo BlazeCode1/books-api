@@ -14,7 +14,7 @@ func main() {
 	app := fiber.New()
 
 	// Serve frontend files
-	app.Static("/", "./client")
+	// app.Static("/", "./client")
 
 	// gRPC connection
 	conn, err := grpc.NewClient("localhost:50051", grpc.WithTransportCredentials(insecure.NewCredentials()))
