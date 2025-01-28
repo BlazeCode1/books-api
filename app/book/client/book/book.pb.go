@@ -2,9 +2,9 @@
 // versions:
 // 	protoc-gen-go v1.36.2
 // 	protoc        v5.29.3
-// source: server/proto/book.proto
+// source: client/book/book.book
 
-package proto
+package book
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"

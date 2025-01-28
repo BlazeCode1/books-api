@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"github.com/BlazeCode1/books-api/services"
+	"github.com/BlazeCode1/books-api/app/book/services"
 	"github.com/gofiber/fiber/v2"
 )
 

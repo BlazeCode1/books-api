@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package book;
 
-option go_package = "github.com/BlazeCode1/books-api/server/proto";
+option go_package = "github.com/BlazeCode1/books-api/client/book";
 
 
 service BookService {
