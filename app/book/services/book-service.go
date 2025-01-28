@@ -2,7 +2,6 @@ package services
 
 import (
 	"context"
-	"encoding/json"
 	"log"
 
 	"github.com/BlazeCode1/books-api/app/book/client/book"
@@ -59,16 +58,22 @@ func (s *bookService) DeleteBook(id string) (*book.BookResponse, error) {
 
 func (s *bookService) UpdateBook(id string, book Book.Book) error {
 	// Serialize the entire book struct into JSON
-	bookData, err := json.Marshal(book)
-	if err != nil {
-		log.Printf("Failed to serialize book: %v", err)
-		return err
-	}
+	//bookData, err := json.Marshal(book)
+	//if err != nil {
+	//	log.Printf("Failed to serialize book: %v", err)
+	//	return err
+	//}
 
 	// Create Kafka message with ID as the key and the serialized book as the value
+	// todo: this is the right thing
+	//message := kafka.Message{
+	//	Key:   []byte(id),
+	//	Value: bookData,
+	//}
+
 	message := kafka.Message{
 		Key:   []byte(id),
-		Value: bookData,
+		Value: []byte(book.BookName),
 	}
 
 	// Send the message to Kafka
