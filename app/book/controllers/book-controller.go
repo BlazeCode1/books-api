@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"github.com/BlazeCode1/books-api/app/book/model/Book"
 	"github.com/BlazeCode1/books-api/app/book/services"
 	"github.com/gofiber/fiber/v2"
 )
@@ -68,7 +69,12 @@ func (bc *BookController) UpdateBook(c *fiber.Ctx) error {
 		return fiber.NewError(fiber.StatusBadRequest, "Invalid request")
 	}
 
-	err := bc.bookService.UpdateBook(request.Id, request.BookName)
+	book := Book.Book{
+		ID:       request.Id,
+		BookName: request.BookName,
+	}
+
+	err := bc.bookService.UpdateBook(book.ID, book)
 	if err != nil {
 		return fiber.NewError(fiber.StatusInternalServerError, "Failed to update book")
 	}
