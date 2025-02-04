@@ -1,10 +1,11 @@
 package main
 
 import (
+	"log"
+
 	"github.com/BlazeCode1/books-api/app/book/controllers"
 	"github.com/BlazeCode1/books-api/app/book/services"
 	"github.com/gofiber/fiber/v2/middleware/cors"
-	"log"
 
 	"github.com/gofiber/fiber/v2"
 	"google.golang.org/grpc"
@@ -23,7 +24,7 @@ func main() {
 	//app.Static("/", "./client")
 
 	// gRPC connection
-	conn, err := grpc.NewClient("localhost:50051", grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, err := grpc.NewClient("host.docker.internal:50051", grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Fatalf("Failed to connect to gRPC client: %v", err)
 	}

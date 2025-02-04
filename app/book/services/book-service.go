@@ -27,7 +27,7 @@ type bookService struct {
 func NewBookService(conn *grpc.ClientConn) BookService {
 	client := book.NewBookServiceClient(conn)
 	producer := kafka.NewWriter(kafka.WriterConfig{
-		Brokers: []string{"localhost:9092"},
+		Brokers: []string{"broker:29092"},
 		Topic:   "book-events",
 	})
 	return &bookService{client: client, producer: producer}
