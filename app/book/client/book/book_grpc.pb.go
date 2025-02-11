@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v5.29.3
-// source: client/book/book.book
+// source: book.proto
 
 package book
 
@@ -72,7 +72,7 @@ func (c *bookServiceClient) DeleteBook(ctx context.Context, in *BookDeletionRequ
 	return out, nil
 }
 
-// BookServiceServer is the client API for BookService service.
+// BookServiceServer is the server API for BookService service.
 // All implementations must embed UnimplementedBookServiceServer
 // for forward compatibility.
 type BookServiceServer interface {
@@ -195,5 +195,5 @@ var BookService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "client/book/book.book",
+	Metadata: "book.proto",
 }
