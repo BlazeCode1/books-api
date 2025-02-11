@@ -13,7 +13,7 @@ import (
 )
 
 type BookService interface {
-	AddBook(bookName string) (*book.BookResponse, error)
+	AddBook(bookObject Book.Book) (*book.BookResponse, error)
 	GetBooks() ([]*book.BookListResponse, error)
 	DeleteBook(id string) (*book.BookResponse, error)
 	UpdateBook(id string, bookObject Book.Book) error
@@ -33,8 +33,9 @@ func NewBookService(conn *grpc.ClientConn) BookService {
 	return &bookService{client: client, producer: producer}
 }
 
-func (s *bookService) AddBook(bookName string) (*book.BookResponse, error) {
-	response, err := s.client.AddBook(context.Background(), &book.BookRequest{BookName: bookName})
+func (s *bookService) AddBook(bookObject Book.Book) (*book.BookResponse, error) {
+
+	response, err := s.client.AddBook(context.Background(), &book.BookRequest{BookName: bookObject.BookName, Author: bookObject.Author})
 	if err != nil {
 		return nil, err
 	}

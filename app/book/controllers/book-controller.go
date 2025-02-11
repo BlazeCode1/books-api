@@ -19,13 +19,18 @@ func NewBookController(service services.BookService) *BookController {
 func (bc *BookController) AddBook(c *fiber.Ctx) error {
 	var request struct {
 		BookName string `json:"book_name"`
+		Author   string `json:"author"`
 	}
 
 	if err := c.BodyParser(&request); err != nil {
 		return fiber.NewError(fiber.StatusBadRequest, "Invalid request")
 	}
 
-	response, err := bc.bookService.AddBook(request.BookName)
+	book := Book.Book{
+		BookName: request.BookName,
+		Author:   request.Author,
+	}
+	response, err := bc.bookService.AddBook(book)
 	if err != nil {
 		return fiber.NewError(fiber.StatusInternalServerError, "Failed to process book name")
 	}
