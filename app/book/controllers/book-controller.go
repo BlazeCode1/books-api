@@ -17,10 +17,7 @@ func NewBookController(service services.BookService) *BookController {
 }
 
 func (bc *BookController) AddBook(c *fiber.Ctx) error {
-	var request struct {
-		BookName string `json:"book_name"`
-		Author   string `json:"author"`
-	}
+	var request Book.Book
 
 	if err := c.BodyParser(&request); err != nil {
 		return fiber.NewError(fiber.StatusBadRequest, "Invalid request")
@@ -65,19 +62,13 @@ func (bc *BookController) DeleteBook(c *fiber.Ctx) error {
 }
 
 func (bc *BookController) UpdateBook(c *fiber.Ctx) error {
-	var request struct {
-		Id       string `json:"id"`
-		BookName string `json:"book_name"`
-	}
+	var request Book.Book
 
 	if err := c.BodyParser(&request); err != nil {
 		return fiber.NewError(fiber.StatusBadRequest, "Invalid request")
 	}
 
-	book := Book.Book{
-		ID:       request.Id,
-		BookName: request.BookName,
-	}
+	book := request
 
 	err := bc.bookService.UpdateBook(book.ID, book)
 	if err != nil {
